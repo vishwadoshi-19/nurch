@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Phone, KeyRound } from "lucide-react";
 import { PhoneVerificationState } from "../types";
+import homeImg from "../assets/images/home-img.jpg";
 
 interface PhoneVerificationProps {
   verificationState: PhoneVerificationState;
@@ -40,10 +41,11 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
       >
         <div className="text-center mb-12">
           <img
-            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=200&h=200"
+            src={homeImg}
             alt="Healthcare"
-            className="w-24 h-24 mx-auto mb-6 rounded-full object-cover"
+            className="w-40 h-40 mx-auto mb-6 rounded-full object-cover"
           />
+
           <h1 className="text-4xl font-bold text-blue-500 mb-2">Welcome!</h1>
           <p className="text-blue-500 text-lg">
             Sign up to start your career as a caregiver
