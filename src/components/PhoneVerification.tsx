@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Phone, KeyRound } from "lucide-react";
 import { PhoneVerificationState } from "../types";
-import homeImg from "../assets/images/home-img.jpg";
 
 interface PhoneVerificationProps {
   verificationState: PhoneVerificationState;
@@ -41,11 +40,10 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
       >
         <div className="text-center mb-12">
           <img
-            src={homeImg}
+            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=200&h=200"
             alt="Healthcare"
-            className="w-40 h-40 mx-auto mb-6 rounded-full object-cover"
+            className="w-24 h-24 mx-auto mb-6 rounded-full object-cover"
           />
-
           <h1 className="text-4xl font-bold text-blue-500 mb-2">Welcome!</h1>
           <p className="text-blue-500 text-lg">
             Sign up to start your career as a caregiver
@@ -69,8 +67,8 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
                 }
                 placeholder="Enter your phone number"
                 className="block w-full pl-12 pr-4 py-4 rounded-xl bg-white/10 border border-white/20 
-                text-blue-500 placeholder-blue-200 focus:outline-none focus:ring-2 
-                         focus:ring-white/50 focus:border-transparent"
+                         text-blue-500 placeholder-blue-300 focus:outline-none focus:ring-2 
+                         focus:ring-blue/50 focus:border-transparent"
                 required
                 pattern="[0-9]{10}"
               />
@@ -100,8 +98,8 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
                 }
                 placeholder="Enter OTP"
                 className="block w-full pl-12 pr-4 py-4 rounded-xl bg-white/10 border border-white/20 
-                text-blue-500 placeholder-blue-200 focus:outline-none focus:ring-2 
-                         focus:ring-white/50 focus:border-transparent"
+                         text-blue-500 placeholder-blue-300 focus:outline-none focus:ring-2 
+                         focus:ring-blue/50 focus:border-transparent"
                 required
                 pattern="[0-9]{6}"
               />

@@ -1,10 +1,10 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { ArrowLeft, GraduationCap } from "lucide-react";
-import { EducationState } from "../types";
-import { EDUCATION_QUALIFICATIONS, INDIAN_LANGUAGES } from "../constants";
-import { FileUpload } from "./FileUpload";
-import { FormNavigation } from "./FormNavigation";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowLeft, GraduationCap } from 'lucide-react';
+import { EducationState } from '../types';
+import { EDUCATION_QUALIFICATIONS, INDIAN_LANGUAGES } from '../constants';
+import { FileUpload } from './FileUpload';
+import { FormNavigation } from './FormNavigation';
 
 interface EducationSectionProps {
   educationState: EducationState;
@@ -20,26 +20,26 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
   onNext,
 }) => {
   const handleFileChange = (file: File | null) => {
-    setEducationState((prev) => ({
+    setEducationState(prev => ({
       ...prev,
       certificate: file,
-      certificatePreview: file ? URL.createObjectURL(file) : "",
+      certificatePreview: file ? URL.createObjectURL(file) : ''
     }));
   };
 
   const toggleLanguage = (language: string) => {
-    setEducationState((prev) => {
+    setEducationState(prev => {
       const isSelected = prev.languages.includes(language);
       return {
         ...prev,
         languages: isSelected
-          ? prev.languages.filter((l) => l !== language)
-          : [...prev.languages, language],
+          ? prev.languages.filter(l => l !== language)
+          : [...prev.languages, language]
       };
     });
   };
 
-  const canProceed =
+  const canProceed = 
     educationState.qualification &&
     educationState.certificate &&
     educationState.experience >= 0 &&
@@ -54,15 +54,10 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
         className="max-w-md mx-auto pb-24"
       >
         <div className="flex items-center mb-8">
-          <button
-            onClick={onBack}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-          >
+          <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <ArrowLeft className="w-6 h-6 text-gray-800" />
           </button>
-          <h1 className="text-2xl font-bold text-gray-800 ml-4">
-            Education & Experience
-          </h1>
+          <h1 className="text-2xl font-bold text-gray-800 ml-4">Education & Experience</h1>
         </div>
 
         <div className="mb-8 flex items-center justify-center">
@@ -72,26 +67,21 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
         <div className="space-y-6">
           <div>
             <label className="block text-gray-700 font-medium mb-2">
-              Highest Education Qualification{" "}
-              <span className="text-red-500">*</span>
+              Highest Education Qualification <span className="text-red-500">*</span>
             </label>
             <select
               value={educationState.qualification}
-              onChange={(e) =>
-                setEducationState((prev) => ({
-                  ...prev,
-                  qualification: e.target.value,
-                }))
-              }
+              onChange={(e) => setEducationState(prev => ({
+                ...prev,
+                qualification: e.target.value
+              }))}
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
                        focus:ring-2 focus:ring-blue-200 transition-colors"
               required
             >
               <option value="">Select qualification</option>
-              {EDUCATION_QUALIFICATIONS.map((qual) => (
-                <option key={qual} value={qual}>
-                  {qual}
-                </option>
+              {EDUCATION_QUALIFICATIONS.map(qual => (
+                <option key={qual} value={qual}>{qual}</option>
               ))}
             </select>
           </div>
@@ -111,13 +101,11 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
             </label>
             <input
               type="number"
-              value={educationState.experience || ""}
-              onChange={(e) =>
-                setEducationState((prev) => ({
-                  ...prev,
-                  experience: parseInt(e.target.value) || 0,
-                }))
-              }
+              value={educationState.experience || ''}
+              onChange={(e) => setEducationState(prev => ({
+                ...prev,
+                experience: parseInt(e.target.value) || 0
+              }))}
               min="0"
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
                        focus:ring-2 focus:ring-blue-200 transition-colors"
@@ -130,30 +118,25 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
               Marital Status <span className="text-red-500">*</span>
             </label>
             <div className="grid grid-cols-2 gap-4">
-              {["Single", "Married", "Divorced", "Widowed"].map((status) => (
+              {['Single', 'Married', 'Divorced', 'Widowed'].map((status) => (
                 <label
                   key={status}
                   className={`flex items-center justify-center p-3 rounded-xl border-2 cursor-pointer
                            transition-colors ${
-                             educationState.maritalStatus ===
-                             status.toLowerCase()
-                               ? "border-blue-500 bg-blue-50 text-blue-700"
-                               : "border-gray-200 hover:border-blue-200"
+                             educationState.maritalStatus === status.toLowerCase()
+                               ? 'border-blue-500 bg-blue-50 text-blue-700'
+                               : 'border-gray-200 hover:border-blue-200'
                            }`}
                 >
                   <input
                     type="radio"
                     name="maritalStatus"
                     value={status.toLowerCase()}
-                    checked={
-                      educationState.maritalStatus === status.toLowerCase()
-                    }
-                    onChange={(e) =>
-                      setEducationState((prev) => ({
-                        ...prev,
-                        maritalStatus: e.target.value,
-                      }))
-                    }
+                    checked={educationState.maritalStatus === status.toLowerCase()}
+                    onChange={(e) => setEducationState(prev => ({
+                      ...prev,
+                      maritalStatus: e.target.value
+                    }))}
                     className="sr-only"
                   />
                   <span>{status}</span>
@@ -173,8 +156,8 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
                   className={`flex items-center p-3 rounded-xl border-2 cursor-pointer
                            transition-colors ${
                              educationState.languages.includes(language)
-                               ? "border-blue-500 bg-blue-50 text-blue-700"
-                               : "border-gray-200 hover:border-blue-200"
+                               ? 'border-blue-500 bg-blue-50 text-blue-700'
+                               : 'border-gray-200 hover:border-blue-200'
                            }`}
                 >
                   <input
@@ -193,7 +176,7 @@ export const EducationSection: React.FC<EducationSectionProps> = ({
         <FormNavigation
           onBack={onBack}
           onNext={onNext}
-          canProceed={true}
+          canProceed={canProceed}
           currentStep="education"
         />
       </motion.div>
