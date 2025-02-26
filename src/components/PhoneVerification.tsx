@@ -1,8 +1,8 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { Phone, KeyRound } from "lucide-react";
-import { PhoneVerificationState } from "../types";
-import Image from "next/image";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Phone, KeyRound } from 'lucide-react';
+import { PhoneVerificationState } from '../types';
+
 interface PhoneVerificationProps {
   verificationState: PhoneVerificationState;
   setVerificationState: React.Dispatch<
@@ -23,11 +23,11 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
 
   const handleOTPSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (verificationState.otp === "123456") {
+    if (verificationState.otp === '123456') {
       setVerificationState((prev) => ({ ...prev, isVerified: true }));
       onVerified();
     } else {
-      alert("Invalid OTP. Please try again.");
+      alert('Invalid OTP. Please try again.');
     }
   };
 
@@ -39,11 +39,9 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
         className="w-full max-w-md"
       >
         <div className="text-center mb-12">
-          <Image
+          <img
             src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=200&h=200"
             alt="Healthcare"
-            width={96}
-            height={96}
             className="w-24 h-24 mx-auto mb-6 rounded-full object-cover"
           />
           <h1 className="text-4xl font-bold text-blue-500 mb-2">Welcome!</h1>

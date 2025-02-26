@@ -30,7 +30,7 @@ const jobs = [
   // Add more jobs as needed
 ];
 
-export default function Home() {
+export default function Jobs() {
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [clockedIn, setClockedIn] = useState(false);
   const [clockInTime, setClockInTime] = useState<Date | null>(null);
