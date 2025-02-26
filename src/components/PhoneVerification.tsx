@@ -1,7 +1,8 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Phone, KeyRound } from 'lucide-react';
-import { PhoneVerificationState } from '../types';
+import React from "react";
+import { motion } from "framer-motion";
+import { Phone, KeyRound } from "lucide-react";
+import { PhoneVerificationState } from "../types";
+import Image from "next/image";
 
 interface PhoneVerificationProps {
   verificationState: PhoneVerificationState;
@@ -23,11 +24,11 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
 
   const handleOTPSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (verificationState.otp === '123456') {
+    if (verificationState.otp === "123456") {
       setVerificationState((prev) => ({ ...prev, isVerified: true }));
       onVerified();
     } else {
-      alert('Invalid OTP. Please try again.');
+      alert("Invalid OTP. Please try again.");
     }
   };
 
@@ -38,17 +39,18 @@ export const PhoneVerification: React.FC<PhoneVerificationProps> = ({
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md"
       >
-        <div className="text-center mb-12">
-          <img
-            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=200&h=200"
-            alt="Healthcare"
-            className="w-24 h-24 mx-auto mb-6 rounded-full object-cover"
-          />
-          <h1 className="text-4xl font-bold text-blue-500 mb-2">Welcome!</h1>
-          <p className="text-blue-500 text-lg">
-            Sign up to start your career as a caregiver
-          </p>
-        </div>
+        <Image
+          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=200&h=200"
+          alt="Healthcare"
+          width={96}
+          height={96}
+          className="w-24 h-24 mx-auto mb-6 rounded-full object-cover"
+        />
+
+        <h1 className="text-4xl font-bold text-blue-500 mb-2">Welcome!</h1>
+        <p className="text-blue-500 text-lg">
+          Sign up to start your career as a caregiver
+        </p>
 
         {!verificationState.showOTP ? (
           <form onSubmit={handlePhoneSubmit} className="space-y-6">
