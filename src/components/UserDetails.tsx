@@ -1,20 +1,21 @@
-import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Camera, Upload, X } from 'lucide-react';
-import { UserDetailsState } from '../types';
-import { AGENCIES } from '../constants';
+import React, { useRef } from "react";
+import { motion } from "framer-motion";
+import { ArrowLeft, Camera, Upload, X } from "lucide-react";
+import { UserDetailsState } from "../types";
+import { AGENCIES } from "../constants";
+import Image from "next/image";
 
 const INDIAN_CITIES = [
-  'Delhi',
-  'Mumbai',
-  'Bangalore',
-  'Hyderabad',
-  'Chennai',
-  'Kolkata',
-  'Pune',
-  'Ahmedabad',
-  'Jaipur',
-  'Surat'
+  "Delhi",
+  "Mumbai",
+  "Bangalore",
+  "Hyderabad",
+  "Chennai",
+  "Kolkata",
+  "Pune",
+  "Ahmedabad",
+  "Jaipur",
+  "Surat",
 ];
 
 interface UserDetailsProps {
@@ -39,19 +40,19 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      setUserDetails(prev => ({
+      setUserDetails((prev) => ({
         ...prev,
         profilePhoto: file,
-        previewUrl: URL.createObjectURL(file)
+        previewUrl: URL.createObjectURL(file),
       }));
     }
   };
 
   const handleRemovePhoto = () => {
-    setUserDetails(prev => ({
+    setUserDetails((prev) => ({
       ...prev,
       profilePhoto: null,
-      previewUrl: ''
+      previewUrl: "",
     }));
   };
 
@@ -67,7 +68,9 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
           <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
             <ArrowLeft className="w-6 h-6 text-gray-800" />
           </button>
-          <h1 className="text-2xl font-bold text-gray-800 ml-4">Register Your Account</h1>
+          <h1 className="text-2xl font-bold text-gray-800 ml-4">
+            Register Your Account
+          </h1>
         </div>
 
         {/* Profile Photo Preview */}
@@ -75,10 +78,12 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
           <div className="relative inline-block">
             {userDetails.previewUrl ? (
               <div className="relative inline-block">
-                <img
+                <Image
                   src={userDetails.previewUrl}
                   alt="Profile Preview"
                   className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
+                  width={128}
+                  height={128}
                 />
                 <button
                   onClick={handleRemovePhoto}
@@ -121,7 +126,7 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
             </button>
             <button
               type="button"
-              onClick={() => fileInputRef.current?. click()}
+              onClick={() => fileInputRef.current?.click()}
               className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
             >
               <Upload className="w-4 h-4" />
@@ -130,7 +135,9 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
           </div>
         </div>
 
-        <h2 className="text-xl font-semibold text-gray-800 mb-6">Enter Your Details</h2>
+        <h2 className="text-xl font-semibold text-gray-800 mb-6">
+          Enter Your Details
+        </h2>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Full Name */}
@@ -141,7 +148,12 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
             <input
               type="text"
               value={userDetails.fullName}
-              onChange={(e) => setUserDetails(prev => ({ ...prev, fullName: e.target.value }))}
+              onChange={(e) =>
+                setUserDetails((prev) => ({
+                  ...prev,
+                  fullName: e.target.value,
+                }))
+              }
               placeholder="Enter your full name"
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
@@ -156,14 +168,18 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
             </label>
             <select
               value={userDetails.agency}
-              onChange={(e) => setUserDetails(prev => ({ ...prev, agency: e.target.value }))}
+              onChange={(e) =>
+                setUserDetails((prev) => ({ ...prev, agency: e.target.value }))
+              }
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
                        focus:ring-2 focus:ring-blue-200 transition-colors appearance-none bg-white"
             >
               <option value="">Select agency</option>
-              {AGENCIES.map(agency => (
-                <option key={agency} value={agency.toLowerCase()}>{agency}</option>
+              {AGENCIES.map((agency) => (
+                <option key={agency} value={agency.toLowerCase()}>
+                  {agency}
+                </option>
               ))}
             </select>
           </div>
@@ -175,14 +191,21 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
             </label>
             <select
               value={userDetails.jobLocation}
-              onChange={(e) => setUserDetails(prev => ({ ...prev, jobLocation: e.target.value }))}
+              onChange={(e) =>
+                setUserDetails((prev) => ({
+                  ...prev,
+                  jobLocation: e.target.value,
+                }))
+              }
               required
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
                        focus:ring-2 focus:ring-blue-200 transition-colors appearance-none bg-white"
             >
               <option value="">Select city</option>
-              {INDIAN_CITIES.map(city => (
-                <option key={city} value={city.toLowerCase()}>{city}</option>
+              {INDIAN_CITIES.map((city) => (
+                <option key={city} value={city.toLowerCase()}>
+                  {city}
+                </option>
               ))}
             </select>
           </div>
@@ -193,14 +216,22 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
               Gender <span className="text-red-500">*</span>
             </label>
             <div className="flex gap-6">
-              {['Male', 'Female', 'Other'].map((option) => (
-                <label key={option} className="flex items-center space-x-2 cursor-pointer">
+              {["Male", "Female", "Other"].map((option) => (
+                <label
+                  key={option}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     name="gender"
                     value={option.toLowerCase()}
                     checked={userDetails.gender === option.toLowerCase()}
-                    onChange={(e) => setUserDetails(prev => ({ ...prev, gender: e.target.value }))}
+                    onChange={(e) =>
+                      setUserDetails((prev) => ({
+                        ...prev,
+                        gender: e.target.value,
+                      }))
+                    }
                     required
                     className="w-4 h-4 text-blue-500 border-gray-300 focus:ring-blue-500"
                   />
@@ -213,7 +244,13 @@ export const UserDetails: React.FC<UserDetailsProps> = ({
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={!userDetails.fullName || !userDetails.jobLocation || !userDetails.gender || !userDetails.profilePhoto || !userDetails.agency}
+            disabled={
+              !userDetails.fullName ||
+              !userDetails.jobLocation ||
+              !userDetails.gender ||
+              !userDetails.profilePhoto ||
+              !userDetails.agency
+            }
             className="w-full bg-blue-500 text-white py-4 px-6 rounded-full font-semibold
                      hover:bg-blue-600 transition-colors duration-200 mt-8
                      disabled:bg-gray-300 disabled:cursor-not-allowed"

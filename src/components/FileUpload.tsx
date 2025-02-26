@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
-import { Upload, X } from 'lucide-react';
+import React, { useRef } from "react";
+import Image from "next/image";
+import { Upload, X } from "lucide-react";
 
 interface FileUploadProps {
   label: string;
@@ -36,7 +37,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
   const handleRemove = () => {
     onChange(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -55,9 +56,13 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         />
         {value ? (
           <div className="flex items-center gap-2 p-2 border rounded-lg">
-            {previewUrl && accept.includes('image') && (
-              <img src={previewUrl} alt="Preview" className="w-12 h-12 object-cover rounded" />
-            )}
+            <Image
+              src={previewUrl || "/default-image.png"}
+              alt="Preview"
+              width={48}
+              height={48}
+              className="object-cover rounded"
+            />
             <span className="flex-1 truncate">{value.name}</span>
             <button
               type="button"
