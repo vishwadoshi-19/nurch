@@ -270,7 +270,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <FormProgress currentStep={step} steps={FORM_STEPS} />
+      <FormProgress currentStep={step} steps={[...FORM_STEPS]} />
 
       <AnimatePresence mode="wait">
         {step === "phone" && (

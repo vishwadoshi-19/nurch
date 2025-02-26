@@ -1,13 +1,22 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import Calendar from 'react-calendar';
-import { format } from 'date-fns';
-import { Activity, Clock, Heart, Thermometer, Droplet, Settings as Lungs, Check, Plus } from 'lucide-react';
-import { TaskList } from '@/components/TaskList';
-import { VitalsCard } from '@/components/VitalsCard';
-import { AttendanceBar } from '@/components/AttendanceBar';
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Calendar from "react-calendar";
+import { format } from "date-fns";
+import {
+  Activity,
+  Clock,
+  Heart,
+  Thermometer,
+  Droplet,
+  Settings as Lungs,
+  Check,
+  Plus,
+} from "lucide-react";
+import { TaskList } from "@/components/TaskList";
+import { VitalsCard } from "@/components/VitalsCard";
+import { AttendanceBar } from "@/components/AttendanceBar";
 
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
@@ -15,25 +24,30 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 export default function DailyTasks() {
   const [selectedDate, setSelectedDate] = useState<Value>(new Date());
   const [tasks, setTasks] = useState([
-    { id: 1, title: 'Morning Medication', completed: false, time: '08:00 AM' },
-    { id: 2, title: 'Blood Pressure Check', completed: false, time: '09:00 AM' },
-    { id: 3, title: 'Physical Therapy', completed: false, time: '10:30 AM' },
-    { id: 4, title: 'Lunch Medication', completed: false, time: '01:00 PM' },
-    { id: 5, title: 'Evening Walk', completed: false, time: '05:00 PM' },
+    { id: 1, title: "Morning Medication", completed: false, time: "08:00 AM" },
+    {
+      id: 2,
+      title: "Blood Pressure Check",
+      completed: false,
+      time: "09:00 AM",
+    },
+    { id: 3, title: "Physical Therapy", completed: false, time: "10:30 AM" },
+    { id: 4, title: "Lunch Medication", completed: false, time: "01:00 PM" },
+    { id: 5, title: "Evening Walk", completed: false, time: "05:00 PM" },
   ]);
 
   const [vitals, setVitals] = useState({
-    bloodPressure: '120/80',
-    heartRate: '72',
-    temperature: '98.6',
-    oxygenLevel: '98',
-    bloodSugar: '110'
+    bloodPressure: "120/80",
+    heartRate: "72",
+    temperature: "98.6",
+    oxygenLevel: "98",
+    bloodSugar: "110",
   });
 
   const [attendance, setAttendance] = useState({
-    clockIn: '09:00 AM',
-    clockOut: '05:00 PM',
-    totalHours: 8
+    clockIn: "09:00 AM",
+    clockOut: "05:00 PM",
+    totalHours: 8,
   });
 
   return (
@@ -51,14 +65,18 @@ export default function DailyTasks() {
 
       {/* Attendance Tracking */}
       <div className="mb-8">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Today's Attendance</h2>
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+          Today&apos;s Attendance
+        </h2>
         <AttendanceBar attendance={attendance} />
       </div>
 
       {/* Vitals Section */}
       <div className="mb-8">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">Patient Vitals</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Patient Vitals
+          </h2>
           <button className="text-blue-500 hover:text-blue-600">
             <Plus className="w-5 h-5" />
           </button>
@@ -105,11 +123,16 @@ export default function DailyTasks() {
             <Plus className="w-5 h-5" />
           </button>
         </div>
-        <TaskList tasks={tasks} onTaskToggle={(id) => {
-          setTasks(tasks.map(task =>
-            task.id === id ? { ...task, completed: !task.completed } : task
-          ));
-        }} />
+        <TaskList
+          tasks={tasks}
+          onTaskToggle={(id) => {
+            setTasks(
+              tasks.map((task) =>
+                task.id === id ? { ...task, completed: !task.completed } : task
+              )
+            );
+          }}
+        />
       </div>
     </div>
   );
