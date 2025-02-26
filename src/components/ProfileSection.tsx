@@ -1,5 +1,5 @@
-import { DivideIcon as LucideIcon } from 'lucide-react';
-import { ChevronRight } from 'lucide-react';
+import { DivideIcon as LucideIcon } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 interface ProfileItem {
   label?: string;
@@ -8,12 +8,16 @@ interface ProfileItem {
 }
 
 interface ProfileSectionProps {
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   title: string;
   items: ProfileItem[];
 }
 
-export const ProfileSection = ({ icon: Icon, title, items }: ProfileSectionProps) => {
+export const ProfileSection = ({
+  icon: Icon,
+  title,
+  items,
+}: ProfileSectionProps) => {
   return (
     <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
       <div className="p-4 border-b border-gray-200">

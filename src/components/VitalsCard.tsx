@@ -1,13 +1,18 @@
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import { DivideIcon as LucideIcon } from "lucide-react";
 
 interface VitalsCardProps {
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   title: string;
   value: string;
   unit: string;
 }
 
-export const VitalsCard = ({ icon: Icon, title, value, unit }: VitalsCardProps) => {
+export const VitalsCard = ({
+  icon: Icon,
+  title,
+  value,
+  unit,
+}: VitalsCardProps) => {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4">
       <div className="flex items-center gap-3 mb-3">

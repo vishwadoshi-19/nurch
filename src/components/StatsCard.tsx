@@ -1,13 +1,18 @@
-import { DivideIcon as LucideIcon } from 'lucide-react';
+import { DivideIcon as LucideIcon } from "lucide-react";
 
 interface StatsCardProps {
-  icon: LucideIcon;
+  icon: typeof LucideIcon;
   title: string;
   value: number;
   suffix?: string;
 }
 
-export const StatsCard = ({ icon: Icon, title, value, suffix = '' }: StatsCardProps) => {
+export const StatsCard = ({
+  icon: Icon,
+  title,
+  value,
+  suffix = "",
+}: StatsCardProps) => {
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-4">
       <div className="flex items-center gap-2 mb-2">

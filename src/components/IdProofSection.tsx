@@ -1,9 +1,9 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, FileCheck } from 'lucide-react';
-import { IdProofState } from '../types';
-import { FileUpload } from './FileUpload';
-import { FormNavigation } from './FormNavigation';
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowLeft, FileCheck } from "lucide-react";
+import { IdProofState } from "../types";
+import { FileUpload } from "./FileUpload";
+import { FormNavigation } from "./FormNavigation";
 
 interface IdProofSectionProps {
   idProofState: IdProofState;
@@ -18,17 +18,18 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
   onBack,
   onNext,
 }) => {
-  const handleFileChange = (field: keyof IdProofState) => (file: File | null) => {
-    setIdProofState(prev => ({
-      ...prev,
-      [field]: file
-    }));
-  };
+  const handleFileChange =
+    (field: keyof IdProofState) => (file: File | null) => {
+      setIdProofState((prev) => ({
+        ...prev,
+        [field]: file,
+      }));
+    };
 
-  const canProceed = 
-    idProofState.aadharNumber &&
-    idProofState.aadharFront &&
-    idProofState.aadharBack;
+  const canProceed =
+    !!idProofState.aadharNumber &&
+    !!idProofState.aadharFront &&
+    !!idProofState.aadharBack;
 
   return (
     <div className="min-h-screen bg-white px-4 py-6">
@@ -38,7 +39,10 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
         className="max-w-md mx-auto pb-24"
       >
         <div className="flex items-center mb-8">
-          <button onClick={onBack} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+          <button
+            onClick={onBack}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+          >
             <ArrowLeft className="w-6 h-6 text-gray-800" />
           </button>
           <h1 className="text-2xl font-bold text-gray-800 ml-4">ID Proof</h1>
@@ -56,10 +60,12 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
             <input
               type="text"
               value={idProofState.aadharNumber}
-              onChange={(e) => setIdProofState(prev => ({
-                ...prev,
-                aadharNumber: e.target.value
-              }))}
+              onChange={(e) =>
+                setIdProofState((prev) => ({
+                  ...prev,
+                  aadharNumber: e.target.value,
+                }))
+              }
               placeholder="Enter your Aadhar number"
               pattern="[0-9]{12}"
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
@@ -72,7 +78,7 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
             label="Aadhar Card Front"
             required
             value={idProofState.aadharFront}
-            onChange={handleFileChange('aadharFront')}
+            onChange={handleFileChange("aadharFront")}
             maxSize={2 * 1024 * 1024} // 2MB
           />
 
@@ -80,7 +86,7 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
             label="Aadhar Card Back"
             required
             value={idProofState.aadharBack}
-            onChange={handleFileChange('aadharBack')}
+            onChange={handleFileChange("aadharBack")}
             maxSize={2 * 1024 * 1024} // 2MB
           />
 
@@ -91,10 +97,12 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
             <input
               type="text"
               value={idProofState.panNumber}
-              onChange={(e) => setIdProofState(prev => ({
-                ...prev,
-                panNumber: e.target.value
-              }))}
+              onChange={(e) =>
+                setIdProofState((prev) => ({
+                  ...prev,
+                  panNumber: e.target.value,
+                }))
+              }
               placeholder="Enter your PAN number"
               pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}"
               className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-blue-500 
@@ -105,7 +113,7 @@ export const IdProofSection: React.FC<IdProofSectionProps> = ({
           <FileUpload
             label="PAN Card"
             value={idProofState.panCard}
-            onChange={handleFileChange('panCard')}
+            onChange={handleFileChange("panCard")}
             maxSize={2 * 1024 * 1024} // 2MB
           />
         </div>
