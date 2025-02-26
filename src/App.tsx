@@ -26,7 +26,7 @@ import { TestimonialSection } from "./components/TestimonialSection";
 import { IdProofSection } from "./components/IdProofSection";
 import { FormProgress } from "./components/FormProgress";
 
-const FORM_STEPS = [
+const FORM_STEPS: { id: FormStep; label: string }[] = [
   { id: "phone", label: "Phone" },
   { id: "details", label: "Details" },
   { id: "wages", label: "Wages" },
@@ -36,7 +36,7 @@ const FORM_STEPS = [
   { id: "personal", label: "Personal" },
   { id: "testimonial", label: "Testimonial" },
   { id: "idproof", label: "ID Proof" },
-] as const;
+];
 
 function App() {
   const [step, setStep] = useState<
@@ -273,10 +273,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      <FormProgress
-        currentStep={step}
-        steps={FORM_STEPS as unknown as { id: FormStep; label: string }[]}
-      />
+      <FormProgress currentStep={step} steps={FORM_STEPS} />
 
       <AnimatePresence mode="wait">
         {step === "phone" && (
@@ -317,6 +314,7 @@ function App() {
           <ShiftSelection
             shiftsState={shiftsState}
             setShiftsState={setShiftsState}
+            onBack={() => setStep("education")}
             onSubmit={handleShiftsSubmitted}
           />
         )}

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-import { Heart } from 'lucide-react';
-import Image from 'next/image';
+import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
+import { Heart } from "lucide-react";
+import Image from "next/image";
 import {
   FormState,
   PhoneVerificationState,
@@ -14,8 +14,9 @@ import {
   SkillsState,
   PersonalInfoState,
   TestimonialState,
-  IdProofState
-} from '@/types';
+  IdProofState,
+  FormStep,
+} from "@/types";
 import {
   PhoneVerification,
   UserDetails,
@@ -26,37 +27,49 @@ import {
   PersonalInfoSection,
   TestimonialSection,
   IdProofSection,
-  FormProgress
-} from '@/components';
+  FormProgress,
+} from "@/components";
 
-const FORM_STEPS = [
-  { id: 'phone', label: 'Phone' },
-  { id: 'details', label: 'Details' },
-  { id: 'wages', label: 'Wages' },
-  { id: 'education', label: 'Education' },
-  { id: 'shifts', label: 'Shifts' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'personal', label: 'Personal' },
-  { id: 'testimonial', label: 'Testimonial' },
-  { id: 'idproof', label: 'ID Proof' }
-] as const;
+const FORM_STEPS: { id: FormStep; label: string }[] = [
+  { id: "phone", label: "Phone" },
+  { id: "details", label: "Details" },
+  { id: "wages", label: "Wages" },
+  { id: "education", label: "Education" },
+  { id: "shifts", label: "Shifts" },
+  { id: "skills", label: "Skills" },
+  { id: "personal", label: "Personal" },
+  { id: "testimonial", label: "Testimonial" },
+  { id: "idproof", label: "ID Proof" },
+];
 
 export default function Home() {
-  const [step, setStep] = useState<'phone' | 'details' | 'wages' | 'education' | 'shifts' | 'skills' | 'personal' | 'testimonial' | 'idproof' | 'completed'>('phone');
+  const [step, setStep] = useState<
+    | "phone"
+    | "details"
+    | "wages"
+    | "education"
+    | "shifts"
+    | "skills"
+    | "personal"
+    | "testimonial"
+    | "idproof"
+    | "completed"
+  >("phone");
   const [formState, setFormState] = useState<FormState>({});
-  const [verificationState, setVerificationState] = useState<PhoneVerificationState>({
-    phoneNumber: '',
-    showOTP: false,
-    otp: '',
-    isVerified: false,
-  });
+  const [verificationState, setVerificationState] =
+    useState<PhoneVerificationState>({
+      phoneNumber: "",
+      showOTP: false,
+      otp: "",
+      isVerified: false,
+    });
   const [userDetails, setUserDetails] = useState<UserDetailsState>({
-    fullName: '',
-    jobLocation: '',
-    gender: '',
+    fullName: "",
+    jobLocation: "",
+    gender: "",
     profilePhoto: null,
-    previewUrl: '',
-    agency: '',
+    previewUrl: "",
+    agency: "",
   });
   const [wagesState, setWagesState] = useState<WagesState>({
     lessThan5Hours: 0,
@@ -64,126 +77,132 @@ export default function Home() {
     hours24: 0,
   });
   const [educationState, setEducationState] = useState<EducationState>({
-    qualification: '',
+    qualification: "",
     certificate: null,
-    certificatePreview: '',
+    certificatePreview: "",
     experience: 0,
-    maritalStatus: '',
+    maritalStatus: "",
     languages: [],
   });
   const [shiftsState, setShiftsState] = useState<ShiftsState>({
     preferredShifts: [],
   });
   const [skillsState, setSkillsState] = useState<SkillsState>({
-    jobRole: '',
+    jobRole: "",
     services: [],
   });
-  const [personalInfoState, setPersonalInfoState] = useState<PersonalInfoState>({
-    foodPreference: '',
-    smoking: '',
-    carryFood: '',
-    additionalInfo: '',
-  });
+  const [personalInfoState, setPersonalInfoState] = useState<PersonalInfoState>(
+    {
+      foodPreference: "",
+      smoking: "",
+      carryFood: "",
+      additionalInfo: "",
+    }
+  );
   const [testimonialState, setTestimonialState] = useState<TestimonialState>({
     recording: null,
-    customerName: '',
-    customerPhone: '',
+    customerName: "",
+    customerPhone: "",
   });
   const [idProofState, setIdProofState] = useState<IdProofState>({
-    aadharNumber: '',
+    aadharNumber: "",
     aadharFront: null,
     aadharBack: null,
-    panNumber: '',
+    panNumber: "",
     panCard: null,
   });
 
   const handlePhoneVerified = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       phoneNumber: verificationState.phoneNumber,
     }));
-    setStep('details');
+    setStep("details");
   };
 
   const handleDetailsSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...userDetails,
     }));
-    setStep('wages');
+    setStep("wages");
   };
 
   const handleWagesSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...wagesState,
     }));
-    setStep('education');
+    setStep("education");
   };
 
   const handleEducationSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...educationState,
     }));
-    setStep('shifts');
+    setStep("shifts");
   };
 
   const handleShiftsSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...shiftsState,
     }));
-    setStep('skills');
+    setStep("skills");
   };
 
   const handleSkillsSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...skillsState,
     }));
-    setStep('personal');
+    setStep("personal");
   };
 
   const handlePersonalInfoSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...personalInfoState,
     }));
-    setStep('testimonial');
+    setStep("testimonial");
   };
 
   const handleTestimonialSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...testimonialState,
     }));
-    setStep('idproof');
+    setStep("idproof");
   };
 
   const handleIdProofSubmitted = () => {
-    setFormState(prev => ({
+    setFormState((prev) => ({
       ...prev,
       ...idProofState,
     }));
-    setStep('completed');
-    console.log('Complete form data:', formState);
+    setStep("completed");
+    console.log("Complete form data:", formState);
   };
 
-  if (step === 'completed') {
+  if (step === "completed") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-400 flex items-center justify-center p-6">
         <div className="text-center text-white space-y-6">
           <Heart className="w-16 h-16 mx-auto text-red-400 animate-pulse" />
           <h1 className="text-4xl font-bold">Thank you!</h1>
-          <p className="text-xl text-blue-50">Your application has been received.</p>
+          <p className="text-xl text-blue-50">
+            Your application has been received.
+          </p>
           <div className="mt-8 bg-white/10 p-6 rounded-lg text-left max-w-md mx-auto">
             <h2 className="text-xl font-semibold mb-4">Application Summary</h2>
             <div className="flex items-center justify-center mb-6">
               {userDetails.previewUrl && (
-                <img
+                <Image
                   src={userDetails.previewUrl}
                   alt="Profile"
+                  width={96}
+                  height={96}
                   className="w-24 h-24 rounded-full object-cover border-2 border-white"
                 />
               )}
@@ -229,11 +248,11 @@ export default function Home() {
               </div>
               <div>
                 <dt className="text-blue-200">Languages:</dt>
-                <dd>{educationState.languages.join(', ')}</dd>
+                <dd>{educationState.languages.join(", ")}</dd>
               </div>
               <div>
                 <dt className="text-blue-200">Preferred Shifts:</dt>
-                <dd>{shiftsState.preferredShifts.join(', ')}</dd>
+                <dd>{shiftsState.preferredShifts.join(", ")}</dd>
               </div>
               <div>
                 <dt className="text-blue-200">Job Role:</dt>
@@ -243,7 +262,7 @@ export default function Home() {
                 <dt className="text-blue-200">Services:</dt>
                 <dd>
                   <ul className="list-disc list-inside">
-                    {skillsState.services.map(service => (
+                    {skillsState.services.map((service) => (
                       <li key={service}>{service}</li>
                     ))}
                   </ul>
@@ -259,17 +278,17 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       <FormProgress currentStep={step} steps={FORM_STEPS} />
-      
+
       <AnimatePresence mode="wait">
-        {step === 'phone' && (
+        {step === "phone" && (
           <PhoneVerification
             verificationState={verificationState}
             setVerificationState={setVerificationState}
             onVerified={handlePhoneVerified}
           />
         )}
-        
-        {step === 'details' && (
+
+        {step === "details" && (
           <UserDetails
             userDetails={userDetails}
             setUserDetails={setUserDetails}
@@ -277,65 +296,65 @@ export default function Home() {
           />
         )}
 
-        {step === 'wages' && (
+        {step === "wages" && (
           <WagesSection
             wagesState={wagesState}
             setWagesState={setWagesState}
-            onBack={() => setStep('details')}
+            onBack={() => setStep("details")}
             onNext={handleWagesSubmitted}
           />
         )}
 
-        {step === 'education' && (
+        {step === "education" && (
           <EducationSection
             educationState={educationState}
             setEducationState={setEducationState}
-            onBack={() => setStep('wages')}
+            onBack={() => setStep("wages")}
             onNext={handleEducationSubmitted}
           />
         )}
 
-        {step === 'shifts' && (
+        {step === "shifts" && (
           <ShiftSelection
             shiftsState={shiftsState}
             setShiftsState={setShiftsState}
-            onBack={() => setStep('education')}
+            onBack={() => setStep("education")}
             onSubmit={handleShiftsSubmitted}
           />
         )}
 
-        {step === 'skills' && (
+        {step === "skills" && (
           <SkillsSection
             skillsState={skillsState}
             setSkillsState={setSkillsState}
-            onBack={() => setStep('shifts')}
+            onBack={() => setStep("shifts")}
             onNext={handleSkillsSubmitted}
           />
         )}
 
-        {step === 'personal' && (
+        {step === "personal" && (
           <PersonalInfoSection
             personalInfoState={personalInfoState}
             setPersonalInfoState={setPersonalInfoState}
-            onBack={() => setStep('skills')}
+            onBack={() => setStep("skills")}
             onNext={handlePersonalInfoSubmitted}
           />
         )}
 
-        {step === 'testimonial' && (
+        {step === "testimonial" && (
           <TestimonialSection
             testimonialState={testimonialState}
             setTestimonialState={setTestimonialState}
-            onBack={() => setStep('personal')}
+            onBack={() => setStep("personal")}
             onNext={handleTestimonialSubmitted}
           />
         )}
 
-        {step === 'idproof' && (
+        {step === "idproof" && (
           <IdProofSection
             idProofState={idProofState}
             setIdProofState={setIdProofState}
-            onBack={() => setStep('testimonial')}
+            onBack={() => setStep("testimonial")}
             onNext={handleIdProofSubmitted}
           />
         )}
