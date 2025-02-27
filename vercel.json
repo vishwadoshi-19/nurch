@@ -1,4 +1,6 @@
 {
   "routes": [{ "src": "/(.*)", "dest": "/" }],
-  "build": { "env": { "NEXT_PRIVATE_TARGET": "server" } }
+  "build": { "env": { "NEXT_PRIVATE_TARGET": "server" } },
+  "builds": [{ "src": "next.config.js", "use": "@vercel/next" }],
+  "outputDirectory": ".next"
 }
