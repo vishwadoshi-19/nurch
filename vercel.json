@@ -1,0 +1,4 @@
+{
+  "routes": [{ "src": "/(.*)", "dest": "/" }],
+  "build": { "env": { "NEXT_PRIVATE_TARGET": "server" } }
+}
